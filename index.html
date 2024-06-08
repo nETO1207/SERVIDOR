@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Controle de Nível de Água</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header com logotipo e menu de navegação -->
+    <header>
+        <div class="logo">Logo do Sistema</div>
+        <nav>
+            <ul>
+                <li><a href="#">Cadastro de Usuário / Login</a></li>
+                <li><a href="#" class="active">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Dashboard com gráfico e medidores de nível de água -->
+    <div class="dashboard">
+        <h2>Dashboard</h2>
+        <div class="chart-container">
+            <!-- Gráfico de nível de água em tempo real -->
+            <canvas id="waterLevelChart"></canvas>
+        </div>
+        <div class="meters">
+            <!-- Medidor 1 -->
+            <div class="meter">
+                <h3>Medidor 1</h3>
+                <div class="meter-level">0 cm</div>
+                <div class="meter-indicator">Nível Normal</div>
+            </div>
+            <!-- Medidor 2 -->
+            <div class="meter">
+                <h3>Medidor 2</h3>
+                <div class="meter-level">0 cm</div>
+                <div class="meter-indicator">Nível Normal</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulário para enviar SMS -->
+    <div class="sms-form">
+        <h2>Enviar SMS de Alerta</h2>
+        <form id="smsForm">
+            <label for="phoneNumber">Número de Telefone:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required>
+            <label for="message">Mensagem:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button type="submit">Enviar SMS</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adiciona um evento de envio ao formulário de SMS
+            document.getElementById('smsForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
+
+                // Obtém os dados do formulário
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                const message = document.getElementById('message').value;
+
+                // Envia os dados para o servidor
+                sendSMS(phoneNumber, message);
+            });
+
+            // Função para enviar SMS usando AJAX
+            function sendSMS(phoneNumber, message) {
+                const url = 'http://localhost:3002/sendSMS'; // URL do endpoint para enviar SMS
+
+                // Cria uma instância de XMLHttpRequest
+                const xhr = new XMLHttpRequest();
+
+                // Configura a solicitação
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                // Define a função de retorno de chamada quando a solicitação estiver concluída
+                xhr.onload = function() {
+                    if (xhr.status === 201) {
+                        console.log('Mensagem SMS enviada com sucesso!');
+                        alert('Mensagem SMS enviada com sucesso!');
+                    } else {
+                        console.error('Erro ao enviar mensagem SMS:', xhr.status, xhr.statusText);
+                        alert('Erro ao enviar mensagem SMS. Por favor, tente novamente.');
+                    }
+                };
+
+                // Define a função de retorno de chamada para erros
+                xhr.onerror = function() {
+                    console.error('Erro ao enviar mensagem SMS. Verifique a conexão com o servidor.');
+                    alert('Erro ao enviar mensagem SMS. Verifique a conexão com o servidor.');
+                };
+
+                // Envia os dados do formulário como JSON
+                xhr.send(JSON.stringify({ phoneNumber: phoneNumber, message: message }));
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+/* Estilos para o cabeçalho */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a.active {
+    font-weight: bold;
+}
+
+/* Estilos para o dashboard */
+.dashboard {
+    margin: 20px;
+}
+
+.chart-container {
+    margin-bottom: 20px;
+}
+
+.meters {
+    display: flex;
+    justify-content: space-between;
+}
+
+.meter {
+    width: 200px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.meter h3 {
+    margin-top: 0;
+}
+
+.meter-level {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.meter-indicator {
+    margin-top: 10px;
+}
+
+/* Estilos para o formulário de SMS */
+.sms-form {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sms-form h2 {
+    margin-top: 0;
+}
+
+.sms-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.sms-form input[type="tel"],
+.sms-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.sms-form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sms-form button:hover {
+    background-color: #555;
+}
